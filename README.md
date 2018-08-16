@@ -1,4 +1,4 @@
-# vue-auth
+# vue-auth (error handling)
 
 ## Project setup
 ```
