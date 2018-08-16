@@ -1,12 +1,11 @@
+# vue-auth
 
 ## Project setup
-```
-### Install packages
 ```
 npm install
 ```
 
-### Run server 
+### Compiles and run server
 ```
 npm run server
 ```
