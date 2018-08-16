@@ -1,0 +1,41 @@
+"user strict";
+
+const sqlite3 = require('sqlite3').verbose();
+
+class Db {
+    constructor(file) {
+        this.db = new sqlite3.Database(file);
+        this.creatTable()
+    }
+
+    creatTable() {
+        const sql = `
+            CREATE TABLE IF NOT EXISTS user (
+                id integer PRIMARY KEY,
+                name text,
+                email text UNIQUE,
+                user_pass text)`
+        return this.db.run(sql);
+    }
+
+    selectByEmail(email, callback) {
+        return this.db.get(
+            `SELECT * FROM user WHERE email = ?`,
+            [email],
+            function (err, row) {
+                callback(err,row);
+            }
+        );
+    }
+
+    insert(user, callback) {
+        return this.db.run(
+            `INSERT INTO user (name,email,user_pass) VALUES (?,?,?)`,
+            user, (err) => {
+                callback(err);
+            }
+        )
+    }
+}
+
+module.exports = Db;
